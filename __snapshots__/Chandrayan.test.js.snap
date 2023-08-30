@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Object initialization should throw an error for invalid direction 1`] = `"direction must be a single character"`;
+
+exports[`Object initialization should throw an error for invalid number types 1`] = `"x, y, and z must be numbers"`;
+
+exports[`movin function should accept only r l u d f b 1`] = `"invalid inputs of diractions"`;

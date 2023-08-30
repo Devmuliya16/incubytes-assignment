@@ -1,5 +1,11 @@
 class SpaceCraft {
     constructor(direction, x,y,z) {
+        if (typeof direction !== "string" || direction.length !== 1) {
+            throw new Error("direction must be a single character");
+        }
+        if (typeof x !== "number" || typeof y !== "number" || typeof z !== "number") {
+            throw new Error("x, y, and z must be numbers");
+        }
         this.direction = direction;
         this.temp = direction;
         this.x = x;
@@ -54,10 +60,10 @@ class SpaceCraft {
                 break;
             default:
                 break;
+            }
         }
-    }
-
-    rotateRight() {
+        
+        rotateRight() {
         this.direction = this.temp;
         switch (this.direction) {
             case 'N':
@@ -74,6 +80,9 @@ class SpaceCraft {
                 break;
             default:
                 break;
+        }
+        if(this.direction!='U' && this.direction!='D'){
+            this.temp = this.direction;
         }
     }
 
@@ -83,31 +92,41 @@ class SpaceCraft {
             case 'N':
                 this.direction = 'W';
                 break;
-            case 'E':
-                this.direction = 'N';
+            case 'W':
+                this.direction = 'S';
                 break;
             case 'S':
                 this.direction = 'E';
                 break;
-            case 'W':
-                this.direction = 'S';
+            case 'E':
+                this.direction = 'N';
                 break;
             default:
                 break;
         }
+        if(this.direction!='U' && this.direction!='D'){
+            this.temp = this.direction;
+        }
     }
 
     rotateUp() {
-        this.temp = this.direction;
+        if(this.direction!='U' && this.direction!='D'){
+            this.temp = this.direction;
+        }
         this.direction = 'U';
     }
 
     rotateDown() {
-        this.temp = this.direction;
+        if(this.direction!='U' && this.direction!='D'){
+            this.temp = this.direction;
+        }
         this.direction = 'D';
     }
 
     move(command) {
+        if(!['r', 'l', 'f', 'b','u','d'].includes(command)){
+            throw new Error("invalid inputs of diractions");
+        }
         switch (command) {
             case 'f':
                 this.moveForward();
@@ -136,3 +155,10 @@ class SpaceCraft {
 }
 
 module.exports = SpaceCraft;
+
+const spaceCraft = new SpaceCraft('N',0,0,0);
+
+let commands = ['f','r','u','b','l'];
+commands = ['u','d','l','r'];
+
+commands.forEach((command)=>spaceCraft.move(command));
