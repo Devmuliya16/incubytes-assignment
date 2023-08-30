@@ -24,4 +24,31 @@ describe('SpaceCraft class', () => {
     expect(spaceCraft.direction).toBe('E');
   });
 
+  it('should rotate left', () => {
+    spaceCraft.move('l');
+    expect(spaceCraft.direction).toBe('W');
+  });
+
+  it('should rotate up', () => {
+    spaceCraft.move('u');
+    expect(spaceCraft.direction).toBe('U');
+  });
+
+  it('should rotate down', () => {
+    spaceCraft.move('d');
+    expect(spaceCraft.direction).toBe('D');
+  });
+
+  it('should correctly chain multiple moves', () => {
+    spaceCraft.move('f');
+    spaceCraft.move('r');
+    spaceCraft.move('u');
+    spaceCraft.move('b');
+    spaceCraft.move('l');
+    spaceCraft.move('d');
+    expect(spaceCraft.x).toBe(1);
+    expect(spaceCraft.y).toBe(0);
+    expect(spaceCraft.z).toBe(-1);
+    expect(spaceCraft.direction).toBe('S');
+  });
 });
